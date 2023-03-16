@@ -23,6 +23,9 @@ export const Router = () => {
                         <Link to = "/Counters">Counters</Link>
                     </li>
 
+                    <li>
+                        <Link to = "/Items">Items</Link>
+                    </li>
                     
 
 
