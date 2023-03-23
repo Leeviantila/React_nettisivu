@@ -10,6 +10,8 @@ export const Item = (props) => {
         <div>
             <h1>Title:{props.title}</h1>
             <img src = {props.img}/>
+            <p>{props.describtion}</p>
+
 
 
 
