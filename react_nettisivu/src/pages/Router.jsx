@@ -30,6 +30,10 @@ export const Router = () => {
                     <li>
                         <Link to = "/List">List</Link>
                     </li>
+
+                    <li>
+                        <Link to = "/TicTacToe">TicTacToe</Link>
+                    </li>
                     
 
 
