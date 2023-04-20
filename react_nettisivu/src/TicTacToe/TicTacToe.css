@@ -4,8 +4,6 @@
     flex-direction:     row;
     /*gap: 50px;*/
 
-
-
 }
 
 .square{
@@ -16,7 +14,6 @@
     color:              black;
     font-weight:        bolder;
     padding-bottom:     25px;
-    font-size:          30px;
 
 
 }

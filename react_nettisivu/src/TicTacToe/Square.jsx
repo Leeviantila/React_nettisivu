@@ -9,7 +9,7 @@ export const Square =(props)=>{
 
 
 
-            <h1>X</h1>
+            <h1>{props.state}</h1>
         </div>
 
     );
