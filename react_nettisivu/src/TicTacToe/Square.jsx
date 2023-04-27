@@ -5,7 +5,7 @@ export const Square =(props)=>{
 
 
     return(
-        <div className={classes}>
+        <div className={classes} onClick={props.onClick}>
 
 
 
