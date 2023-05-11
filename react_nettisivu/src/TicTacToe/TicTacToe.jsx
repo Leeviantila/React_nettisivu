@@ -17,6 +17,13 @@ export const TicTacToe = (props) => {
         if(winner){
             setStatus(`Winner: ${winner}`);
 
+        }else if(!gameState.includes('')){
+
+            setStatus(`It's a draws`);
+
+
+        }else{
+            setStatus(`It's ${isXTurn ? 'X' : 'O'}'s turn`);
         }
 
     },[gameState])
@@ -24,8 +31,13 @@ export const TicTacToe = (props) => {
     const onSquareClick = (index) => {
         
         let strings = Array.from(gameState);
+        
+        // Peli on voitettu, ei voi painaa enää tuutuja
+        if(status.includes("Winner")){
+            return;
+        }
 
-        if(strings[index] !== ''){
+        if(strings[index] !== '' ){
             return;
 
         }
@@ -40,13 +52,13 @@ export const TicTacToe = (props) => {
         const lines = [
             [0, 1, 2],
             [3, 4, 5],
-            [6, 8, 7],
+            [6, 7, 8],
 
             [0, 3, 6],
-            [1, 4, 8],
-            [2, 5, 7],
+            [1, 4, 7],
+            [2, 5, 8],
 
-            [0, 4, 7],
+            [0, 4, 8],
             [2, 4, 6],
 
         ]
@@ -71,9 +83,36 @@ export const TicTacToe = (props) => {
     return(
 
         <div>
-            <h1>TicTacToe</h1>
-            <Board gameState = {gameState} onSquareClick = {onSquareClick}/>
-            {status}
+            <div className="game">
+
+                <h1>TicTacToe</h1>
+                <Board gameState = {gameState} onSquareClick = {onSquareClick}/>
+                
+                {!status.includes("Winner") && (
+                    <>
+                        <span>{status}</span>
+                        <button onClick={()=>{
+                            setGameState(initialBoard);
+                            setIsXTurn(true);
+
+                        }}>Clear Board</button>
+                    </>
+
+                )}
+
+                {status.includes("Winner") && (
+                    <>
+                        <span style={{color:"green"}}>{status}</span>
+                        <button style={{background:"lightgreen"}} onClick={()=>{
+                            setGameState(initialBoard);
+                            setIsXTurn(true);
+
+                        }}>Play again</button>
+                    </>
+
+                )}
+
+            </div>
         </div>
 
     )
