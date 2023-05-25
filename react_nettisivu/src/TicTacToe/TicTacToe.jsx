@@ -1,8 +1,11 @@
 import React from "react";
 import './TicTacToe.css';
-import { Board } from "./Board";
-import { useState } from "react";
-import { useEffect } from "react";
+
+import { Board          } from "./Board";
+import {ScoreBoard      } from "./ScoreBoard";
+
+import { useState       } from "react";
+import { useEffect      } from "react";
 
 const initialBoard = ['', '', '', '', '', '', '', '', ''];
 
@@ -11,6 +14,7 @@ export const TicTacToe = (props) => {
     const [gameState, setGameState] = useState(initialBoard);
     const [isXTurn, setIsXTurn] = useState(true);
     const [status, setStatus] = useState('');
+    const [scores, setScores] = useState({XScore: 0, OScore: 0});
 
     useEffect(()=> {
         const winner = checkWinner();
@@ -27,6 +31,26 @@ export const TicTacToe = (props) => {
         }
 
     },[gameState])
+
+
+    useEffect(() => {
+        const winner = checkWinner();
+        
+        if(winner === null){
+            return;
+        }
+
+        if(winner === "X"){
+            setScores({XScore: scores.XScore + 1, OScore: scores.OScore});
+        }
+        else{
+            setScores({XScore: scores.XScore, OScore: scores.OScore + 1});
+        }
+
+
+    }, [status])
+
+
 
     const onSquareClick = (index) => {
         
@@ -78,7 +102,12 @@ export const TicTacToe = (props) => {
         
     }
 
+    function clearScoreBoard(){
+        setScores({XScore: 0, OScore: 0});
+        setGameState(initialBoard);
+        setIsXTurn(true);
 
+    }
 
     return(
 
@@ -86,6 +115,10 @@ export const TicTacToe = (props) => {
             <div className="game">
 
                 <h1>TicTacToe</h1>
+
+                <ScoreBoard scores = {scores}/>
+                <button onClick={clearScoreBoard}> Clear ScoreBoard</button>
+
                 <Board gameState = {gameState} onSquareClick = {onSquareClick}/>
                 
                 {!status.includes("Winner") && (
